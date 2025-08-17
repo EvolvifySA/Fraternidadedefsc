@@ -1,0 +1,92 @@
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #774922;
+  border-bottom: 2px solid #ddd;
+  position: relative;
+}
+
+.logo {
+  background: #a83218;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #a83218;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-menu {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #774922;
+    width: 200px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  .menu.ativo {
+    display: flex;
+  }
+
+  .menu a {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .menu a:last-child {
+    border-bottom: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
