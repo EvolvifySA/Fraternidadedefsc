@@ -6,7 +6,7 @@
   padding: 40px 5%;
   gap: 40px;
 
-  background-image: url('/src/img/SantaClara.svg');
+  background-image: url('/src/assets/img/SantaClara.svg');
   background-size: 40% auto; 
   background-position: 40% center; /* 10% da largura da seção da esquerda */
   background-repeat: no-repeat;
