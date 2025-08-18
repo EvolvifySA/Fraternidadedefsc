@@ -1,0 +1,93 @@
+.rodape {
+  background-color: #774922;
+  color: #fff;
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  position: relative; /* garante que não cubra o Home */
+  z-index: 2;         /* fica acima do fundo do body */
+}
+
+.rodape-conteudo {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Coluna de contato */
+.contato {
+  flex: 1;
+  min-width: 250px;
+}
+
+.contato h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.contato p {
+  margin: 5px 0;
+}
+
+/* Ícones sociais */
+.icons {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.icons img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icons img:hover {
+  transform: scale(1.2);
+}
+
+/* Frase central */
+.frase {
+  flex: 1;
+  text-align: center;
+}
+
+.frase p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===================== */
+/* RESPONSIVIDADE MOBILE */
+/* ===================== */
+@media (max-width: 768px) {
+  .rodape-conteudo {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .contato {
+    text-align: center;
+  }
+
+  .icons {
+    justify-content: center;
+  }
+
+.frase {
+  display: flex;
+  justify-content: center; /* centraliza horizontal */
+  align-items: center;    /* centraliza vertical */
+}
+
+.frase p {
+  font-size: 12px;
+  margin: 0; /* remove margem padrão se precisar */
+}
+}

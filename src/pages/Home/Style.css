@@ -1,0 +1,249 @@
+/* === Home Grande === */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 5%;
+  gap: 40px;
+
+  background-image: url('/src/img/SantaClara.svg');
+  background-size: 40% auto; 
+  background-position: 40% center; /* 10% da largura da seção da esquerda */
+  background-repeat: no-repeat;
+}
+.section-divider {
+  width: 100%;
+  border-top: 2px dashed #774922; /* linha pontilhada na cor que quiser */
+  margin: 50px 0; /* espaço acima e abaixo da linha */
+}
+
+.home-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.home-left h1 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.4;
+  max-width: 500px;
+}
+
+.btn-missao {
+  background-color: #774922;
+  color: #fff;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-missao:hover {
+  background-color: #5c3519;
+}
+
+.home-right {
+  flex: 1;
+  height: 400px;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.home-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* === Seção 3 Carrosséis Pequenos === */
+.three-carousel-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 90px;
+  padding: 50px 5%;
+}
+
+.small-carousel {
+  flex: 1;
+  min-width: 250px;
+}
+
+.small-carousel img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* === Conteúdo abaixo dos 3 carrosséis === */
+.three-carousel-texts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 5%;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  gap: 30px;
+}
+
+.carousel-caption {
+  font-size: 3.5rem; 
+  color: #333; 
+  line-height: 1.4;
+  max-width: 500px;
+  text-align: left;
+  font-weight: 700; 
+}
+
+.three-carousel-texts .btn-missao.large-btn {
+  font-size: 2rem;
+  padding: 18px 44px;
+  margin-left: 300px; 
+}
+
+/* === Última Seção - COMO APOIAR === */
+.support-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 5%;
+  gap: 50px;
+  background-color: transparent;
+}
+
+.support-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.support-text h2 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.support-text p {
+  font-size: 1.25rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.support-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.support-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px; /* afasta do texto, se necessário */
+}
+.support-bottom-img {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 25px auto 0 auto; /* margem padrão para centralizar */
+  transform: translateX(-20px); /* puxa 20px para a esquerda */
+}
+
+/* === RESPONSIVIDADE MOBILE === */
+@media (max-width: 1024px) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .home-left h1 {
+    font-size: 2.8rem;
+    max-width: 100%;
+  }
+
+  .btn-missao {
+    font-size: 1.1rem;
+    padding: 14px 30px;
+  }
+
+  .home-right {
+    width: 100%;
+    height: 300px;
+  }
+
+  .home-right img {
+    height: 100%;
+  }
+
+  .small-carousel img {
+    height: 180px;
+  }
+
+  .carousel-caption {
+    font-size: 2.8rem;
+  }
+
+  .three-carousel-texts .btn-missao.large-btn {
+    font-size: 1.5rem;
+    padding: 16px 36px;
+    margin-left: 0;
+  }
+
+  .support-section {
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px 5%;
+  }
+
+  .support-text h2 {
+    font-size: 2.8rem;
+  }
+
+  .support-text p {
+    font-size: 1.1rem;
+  }
+
+  .support-image img {
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-left h1,
+  .carousel-caption,
+  .support-text h2 {
+    font-size: 2rem;
+  }
+
+  .btn-missao {
+    font-size: 1rem;
+    padding: 12px 28px;
+  }
+
+  .three-carousel-texts .btn-missao.large-btn {
+    font-size: 1.2rem;
+    padding: 12px 28px;
+  }
+
+  .support-text p {
+    font-size: 1rem;
+  }
+
+  .support-image img {
+    width: 150px;
+  }
+
+  .small-carousel img {
+    height: 150px;
+  }
+}
