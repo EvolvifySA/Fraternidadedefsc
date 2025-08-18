@@ -4,16 +4,11 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 40px 5%;
-  gap: 40px;
-
-  background-image: url('');
-  background-size: 40% auto; 
-  background-position: 40% center; /* 10% da largura da seção da esquerda */
-  background-repeat: no-repeat;
+  gap: 30px;
 }
 .section-divider {
   width: 100%;
-  border-top: 2px dashed #774922; /* linha pontilhada na cor que quiser */
+  border-top: 2px ; /* linha pontilhada na cor que quiser */
   margin: 50px 0; /* espaço acima e abaixo da linha */
 }
 

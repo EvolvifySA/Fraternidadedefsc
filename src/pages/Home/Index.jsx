@@ -10,7 +10,6 @@ import Carrossel3 from "../../assets/img/Carrossel3.jpg";
 import Carrossel4 from "../../assets/img/Carrossel4.jpg";
 import SantaClaraeJesus from "../../assets/img/SantaClaraeJesus.png";
 import Pix from "../../assets/img/pix.svg";
-import SantaClaraBg from "../../assets/img/SantaClara.svg";
 
 function Home() {
   // Configuração padrão do slider grande
@@ -56,7 +55,7 @@ function Home() {
       {/* === Primeira Seção - Slider Grande com background === */}
       <div
         className="home-container"
-        style={{ backgroundImage: `url(${SantaClaraBg})` }}
+        
       >
         <div className="home-left">
           <h1>Com <br /> prontidão e<br /> solicitude, amar e servir.</h1>
