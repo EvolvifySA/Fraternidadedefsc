@@ -3,9 +3,7 @@
   color: #fff;
   padding: 20px 10px;
   display: flex;
-  justify-content: center;
-  position: relative; /* garante que não cubra o Home */
-  z-index: 2;         /* fica acima do fundo do body */
+  justify-content: flex-start; /* mantém alinhado à esquerda */
 }
 
 .rodape-conteudo {
@@ -15,6 +13,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  padding-left: 40px; /* <-- puxa para a direita sem centralizar */
 }
 
 /* Coluna de contato */

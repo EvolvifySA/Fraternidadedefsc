@@ -4,6 +4,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Style.css";
 
+import Carrossel1 from "../../assets/img/Carrossel1.jpg";
+import Carrossel2 from "../../assets/img/Carrossel2.jpg";
+import Carrossel3 from "../../assets/img/Carrossel3.jpg";
+import Carrossel4 from "../../assets/img/Carrossel4.jpg";
+import SantaClaraeJesus from "../../assets/img/SantaClaraeJesus.png";
+import Pix from "../../assets/img/pix.svg";
+
 function Home() {
   const mainSliderSettings = {
     dots: true,
@@ -40,42 +47,40 @@ function Home() {
 
         <div className="home-right">
           <Slider {...mainSliderSettings}>
-            <div><img src="/src/img/Carrossel1.jpg" alt="Carrossel 1" /></div>
-            <div><img src="/src/img/Carrossel2.jpg" alt="Carrossel 2" /></div>
-            <div><img src="/src/img/Carrossel3.jpg" alt="Carrossel 3" /></div>
-            <div><img src="/src/img/Carrossel4.jpg" alt="Carrossel 4" /></div>
+            <div><img src={Carrossel1} alt="Carrossel 1" /></div>
+            <div><img src={Carrossel2} alt="Carrossel 2" /></div>
+            <div><img src={Carrossel3} alt="Carrossel 3" /></div>
+            <div><img src={Carrossel4} alt="Carrossel 4" /></div>
           </Slider>
         </div>
       </div>
 
-      {/* Linha pontilhada separadora */}
       <div className="section-divider"></div>
 
       {/* === Segunda Seção - 3 Carrosséis Pequenos === */}
       <div className="three-carousel-section">
         <div className="small-carousel">
           <Slider {...smallSliderSettings}>
-            <div><img src="/src/img/Carrossel1.jpg" alt="Carrossel 1A" /></div>
-            <div><img src="/src/img/Carrossel2.jpg" alt="Carrossel 1B" /></div>
+            <div><img src={Carrossel1} alt="Carrossel 1A" /></div>
+            <div><img src={Carrossel2} alt="Carrossel 1B" /></div>
           </Slider>
         </div>
 
         <div className="small-carousel">
           <Slider {...smallSliderSettings}>
-            <div><img src="/src/img/Carrossel3.jpg" alt="Carrossel 2A" /></div>
-            <div><img src="/src/img/Carrossel4.jpg" alt="Carrossel 2B" /></div>
+            <div><img src={Carrossel3} alt="Carrossel 2A" /></div>
+            <div><img src={Carrossel4} alt="Carrossel 2B" /></div>
           </Slider>
         </div>
 
         <div className="small-carousel">
           <Slider {...smallSliderSettings}>
-            <div><img src="/src/img/Carrossel3.jpg" alt="Carrossel 3A" /></div>
-            <div><img src="/src/img/Carrossel2.jpg" alt="Carrossel 3B" /></div>
+            <div><img src={Carrossel3} alt="Carrossel 3A" /></div>
+            <div><img src={Carrossel2} alt="Carrossel 3B" /></div>
           </Slider>
         </div>
       </div>
 
-      {/* === Conteúdo abaixo dos 3 Carrosséis === */}
       <div className="three-carousel-texts">
         <p className="carousel-caption">
           Abrace o Cristo pobre <br /> como uma virgem pobre.
@@ -85,7 +90,6 @@ function Home() {
         </Link>
       </div>
 
-      {/* Linha pontilhada separadora */}
       <div className="section-divider"></div>
 
       {/* === Última Seção - COMO APOIAR === */}
@@ -99,13 +103,13 @@ function Home() {
             divulgação de nossas ações ou colaboração com recursos materiais e humanos.
           </p>
           <img
-            src="/src/img/SantaClaraeJesus.png"
+            src={SantaClaraeJesus}
             alt="Santa Clara e Jesus"
             className="support-bottom-img"
           />
         </div>
         <div className="support-image">
-          <img src="/src/img/pix.svg" alt="Como Apoiar" />
+          <img src={Pix} alt="Como Apoiar" />
         </div>
       </div>
     </div>
@@ -113,3 +117,4 @@ function Home() {
 }
 
 export default Home;
+
