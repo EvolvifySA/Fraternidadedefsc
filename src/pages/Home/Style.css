@@ -94,6 +94,14 @@
   text-align: left;
   font-weight: 700; 
 }
+.carousel-caption-secondary {
+  font-size: 2rem; 
+  color: #555; 
+  line-height: 1.4;
+  max-width: 500px;
+  text-align: left;
+   
+}
 
 .three-carousel-texts .btn-missao.large-btn {
   font-size: 2rem;

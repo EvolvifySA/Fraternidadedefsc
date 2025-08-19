@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Style.css";
 import menuIcon from "../../assets/icon/menu.png";
-import logoFraternidade from "../../assets/img/logo.svg";
+import logoFraternidade from "../../assets/img/logooBranca.png";
 
 function Topo() {
   const [menuAberto, setMenuAberto] = useState(false);

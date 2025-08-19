@@ -90,7 +90,10 @@ function Home() {
 
       <div className="three-carousel-texts">
         <p className="carousel-caption">
-          Abrace o Cristo pobre <br /> como uma virgem pobre.
+          “Não perca de vista seu ponto de partida”
+        </p>
+        <p className="carousel-caption-secondary">
+        Santa Clara de Assis
         </p>
         <Link to="/NossosProjetos">
           <button className="btn-missao large-btn">Nossos Projetos</button>
