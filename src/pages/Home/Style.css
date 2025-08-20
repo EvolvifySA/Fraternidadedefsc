@@ -1,19 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap');
 /* === Home Grande === */
 .home-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 40px 5%;
-  gap: 40px;
-
-  background-image: url('');
-  background-size: 40% auto; 
-  background-position: 40% center; /* 10% da largura da seção da esquerda */
-  background-repeat: no-repeat;
+  gap: 30px;
 }
 .section-divider {
   width: 100%;
-  border-top: 2px dashed #774922; /* linha pontilhada na cor que quiser */
+  border-top: 2px ; /* linha pontilhada na cor que quiser */
   margin: 50px 0; /* espaço acima e abaixo da linha */
 }
 
@@ -25,12 +21,16 @@
   align-items: flex-start;
 }
 
+
+
 .home-left h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: #333;
   margin-bottom: 25px;
   line-height: 1.4;
   max-width: 500px;
+  font-family: "Amatic SC", cursive;
+  font-weight: 1000;
 }
 
 .btn-missao {
@@ -50,17 +50,24 @@
 
 .home-right {
   flex: 1;
-  height: 400px;
+  width: 100%;
   max-width: 600px;
+  height: 400px; /* altura fixa para padronizar */
   overflow: hidden;
 }
 
 .home-right img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* preenche sem distorcer */
   border-radius: 12px;
-  display: block;
+}
+
+.slick-slide img {
+  width: 100%;
+  height: 400px;   /* aqui vc altera o tamanho */
+  object-fit: cover;
+  border-radius: 10px; /* opcional */
 }
 
 /* === Seção 3 Carrosséis Pequenos === */
@@ -81,6 +88,11 @@
 }
 
 /* === Conteúdo abaixo dos 3 carrosséis === */
+.three-carousel-texts .carousel-caption,
+.three-carousel-texts .carousel-caption-secondary {
+  font-family: "Amatic SC", cursive;
+}
+
 .three-carousel-texts {
   display: flex;
   flex-direction: row;
@@ -89,6 +101,12 @@
   margin-top: 20px;
   margin-bottom: 100px;
   gap: 30px;
+}
+.three-carousel-texts img {
+  width: 150px; 
+  height: auto;
+  margin-left: -130px;
+  margin-top: 50px;
 }
 
 .carousel-caption {
@@ -99,11 +117,21 @@
   text-align: left;
   font-weight: 700; 
 }
+.carousel-caption-secondary {
+  font-size: 1.5rem;       
+  color: #555;
+  line-height: 1.4;
+  max-width: 500px;
+  text-align: left;
+  font-family: "Amatic SC", cursive; 
+  margin-top: 5px;         
+}
+
 
 .three-carousel-texts .btn-missao.large-btn {
   font-size: 2rem;
-  padding: 18px 44px;
-  margin-left: 300px; 
+  padding: 18px 30px;
+  margin-left: 200px; 
 }
 
 /* === Última Seção - COMO APOIAR === */

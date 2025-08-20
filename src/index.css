@@ -6,7 +6,7 @@
 
 body {
   min-height: 100vh;
-  width: 100vw;
+  max-width: 100%;
   font-family: Arial, sans-serif;
-  background-color: #bba290;
+  background-image: url('/public/img/fundo.svg');
 }
