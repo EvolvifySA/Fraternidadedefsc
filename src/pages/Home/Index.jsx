@@ -4,12 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Style.css";
 
+import Fogo from "../../assets/img/fogo.svg";
 import Carrossel1 from "../../assets/img/Carrossel1.jpg";
 import Carrossel2 from "../../assets/img/Carrossel2.jpg";
 import Carrossel3 from "../../assets/img/Carrossel3.jpg";
 import Carrossel4 from "../../assets/img/Carrossel4.jpg";
 import SantaClaraeJesus from "../../assets/img/SantaClaraeJesus.png";
 import Pix from "../../assets/img/pix.svg";
+
+
 
 function Home() {
   // Configuração padrão do slider grande
@@ -88,17 +91,25 @@ function Home() {
         </Slider>
       </div>
 
-      <div className="three-carousel-texts">
-        <p className="carousel-caption">
-          “Não perca de vista seu ponto de partida”
-        </p>
-        <p className="carousel-caption-secondary">
-        Santa Clara de Assis
-        </p>
-        <Link to="/NossosProjetos">
-          <button className="btn-missao large-btn">Nossos Projetos</button>
-        </Link>
-      </div>
+   <div className="three-carousel-texts">
+  <div className="text-content">
+    <p className="carousel-caption">
+      “Não perca de vista seu ponto de partida”
+    </p>
+    <p className="carousel-caption-secondary">
+      Santa Clara de Assis
+    </p>
+  </div>
+
+  <div className="image-content">
+    <img src={Fogo} alt="Fogo" />
+  </div>
+
+  <Link to="/NossosProjetos">
+    <button className="btn-missao large-btn">Nossos Projetos</button>
+  </Link>
+</div>
+
 
       <div className="section-divider"></div>
 
