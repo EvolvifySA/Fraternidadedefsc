@@ -1,0 +1,455 @@
+/* ══════════════════════════════════════
+   SEJA UM BENFEITOR / DOADOR
+══════════════════════════════════════ */
+
+/* Hero */
+.doador-hero {
+  position: relative;
+  padding-top: 80px;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center 30%;
+  overflow: hidden;
+  text-align: center;
+}
+.doador-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(30,15,5,0.80) 0%, rgba(74,44,26,0.70) 100%);
+}
+.doador-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 60px 24px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.doador-hero-content h1 {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  color: #fff;
+  margin-bottom: 8px;
+}
+.doador-hero-content p {
+  color: rgba(255,255,255,0.78);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Por que doar */
+.doador-porque {
+  padding: 100px 24px;
+  background: var(--bege-claro);
+}
+.doador-porque-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.doador-porque h2 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--marrom-escuro);
+  margin-bottom: 4px;
+}
+.doador-porque h2 em {
+  font-style: italic;
+  color: var(--marrom);
+  font-weight: 400;
+}
+.doador-porque-sub {
+  color: var(--texto-suave);
+  font-size: 1.02rem;
+  max-width: 560px;
+  line-height: 1.75;
+  margin: 12px 0 48px;
+}
+.impacto-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.impacto-card-doador {
+  background: #fff;
+  border-radius: var(--raio);
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: var(--sombra);
+  border-top: 3px solid var(--dourado);
+  transition: var(--trans);
+}
+.impacto-card-doador:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-grande);
+}
+.impacto-emoji {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.impacto-valor {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  color: var(--marrom);
+  margin-bottom: 8px;
+}
+.impacto-card-doador p {
+  font-size: 0.88rem;
+  color: var(--texto-suave);
+  line-height: 1.65;
+}
+
+/* PIX */
+.doador-pix {
+  padding: 100px 24px;
+  background: var(--bege);
+}
+.doador-pix-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.pix-texto h2 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: var(--marrom-escuro);
+  margin-bottom: 4px;
+}
+.pix-texto h2 em {
+  font-style: italic;
+  color: var(--marrom);
+  font-weight: 400;
+}
+.pix-texto p {
+  color: var(--texto-suave);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.pix-formas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.pix-forma {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: var(--sombra);
+}
+.pix-forma span {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.pix-forma strong {
+  display: block;
+  font-size: 0.90rem;
+  color: var(--texto);
+  margin-bottom: 2px;
+}
+.pix-forma p {
+  font-size: 0.80rem;
+  color: var(--texto-suave);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* QR Card */
+.pix-qr-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 24px 72px rgba(74,44,26,0.16);
+  border-top: 4px solid var(--dourado);
+}
+.pix-badge-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.pix-badge-top span {
+  background: var(--dourado);
+  color: var(--marrom-escuro);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+.pix-badge-top strong {
+  font-size: 0.9rem;
+  color: var(--marrom-escuro);
+}
+.pix-qr-card img {
+  width: 180px;
+  margin: 0 auto 24px;
+}
+.pix-chave-destaque {
+  background: var(--bege);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.pix-chave-label-d {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 4px;
+}
+.pix-chave-valor {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--marrom);
+  word-break: break-all;
+  line-height: 1.5;
+}
+.pix-aviso {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* Benefícios */
+.doador-beneficios {
+  padding: 100px 24px;
+  background: linear-gradient(135deg, var(--marrom) 0%, var(--marrom-escuro) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.doador-beneficios::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.12) 0%, transparent 60%);
+}
+.doador-beneficios-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+.db-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.db-header h2 {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  color: #fff;
+}
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.db-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--raio);
+  padding: 32px 24px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  transition: var(--trans);
+}
+.db-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(201,168,76,0.5);
+  transform: translateY(-4px);
+}
+.db-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 14px;
+}
+.db-card h3 {
+  font-size: 1.05rem;
+  color: var(--dourado-claro);
+  margin-bottom: 10px;
+}
+.db-card p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+}
+
+/* Depoimento */
+.doador-depo {
+  padding: 80px 24px;
+  background: var(--bege);
+}
+.doador-depo-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.doador-depo-inner p {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-style: italic;
+  color: var(--texto);
+  line-height: 1.75;
+}
+.depo-destaque-autor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+.depo-destaque-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--marrom);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.depo-destaque-autor strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--texto);
+}
+.depo-destaque-autor span {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+}
+
+/* FAQ */
+.doador-faq {
+  padding: 80px 24px;
+  background: var(--bege-claro);
+}
+.doador-faq-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.faq-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.faq-header h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--marrom-escuro);
+}
+.faq-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: #fff;
+  border-radius: var(--raio);
+  border: 1px solid rgba(119,73,34,0.10);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+.faq-pergunta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--marrom-escuro);
+  text-align: left;
+  transition: var(--trans);
+}
+.faq-pergunta:hover { color: var(--marrom); }
+.faq-chevron {
+  font-size: 0.65rem;
+  color: var(--dourado);
+  flex-shrink: 0;
+}
+.faq-resposta {
+  padding: 0 24px 20px;
+  font-size: 0.93rem;
+  color: var(--texto-suave);
+  line-height: 1.8;
+  border-top: 1px solid rgba(119,73,34,0.08);
+  padding-top: 16px;
+}
+.faq-aberto .faq-pergunta { color: var(--marrom); }
+
+/* CTA Final */
+.doador-cta-final {
+  background: linear-gradient(150deg, var(--marrom-escuro) 0%, var(--marrom) 100%);
+  padding: 100px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.doador-cta-final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.15) 0%, transparent 60%);
+}
+.doador-cta-final-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+  margin: 0 auto;
+}
+.doador-cta-final h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+  margin-bottom: 16px;
+}
+.doador-cta-final p {
+  color: rgba(255,255,255,0.75);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+.dcf-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .impacto-cards { grid-template-columns: 1fr 1fr; }
+  .db-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .doador-pix-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 560px) {
+  .impacto-cards { grid-template-columns: 1fr 1fr; }
+  .db-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+  .impacto-cards { grid-template-columns: 1fr; }
+  .db-grid { grid-template-columns: 1fr; }
+}

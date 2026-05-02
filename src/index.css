@@ -1,12 +1,167 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Lato:wght@300;400;700;900&display=swap');
+
+:root {
+  --marrom:        #774922;
+  --marrom-escuro: #4a2c1a;
+  --marrom-medio:  #5D3A1A;
+  --dourado:       #C9A84C;
+  --dourado-claro: #E8D5A3;
+  --dourado-brilho: rgba(201, 168, 76, 0.18);
+  --bege:          #F5EFE6;
+  --bege-claro:    #FBF8F3;
+  --texto:         #2C1810;
+  --texto-suave:   #6B4C3B;
+  --branco:        #ffffff;
+  --sombra:        0 4px 24px rgba(74, 44, 26, 0.10);
+  --sombra-grande: 0 16px 64px rgba(74, 44, 26, 0.18);
+  --serif:         'Cormorant Garamond', Georgia, serif;
+  --sans:          'Lato', Arial, sans-serif;
+  --trans:         all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --raio:          14px;
 }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  min-height: 100vh;
-  max-width: 100%;
-  font-family: Arial, sans-serif;
-  background-image: url('/public/img/fundo.svg');
+  font-family: var(--sans);
+  background-color: var(--bege-claro);
+  color: var(--texto);
+  line-height: 1.75;
+  overflow-x: hidden;
 }
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  line-height: 1.2;
+}
+
+img { max-width: 100%; display: block; }
+a   { text-decoration: none; color: inherit; }
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.delay-1 { transition-delay: 0.10s; }
+.delay-2 { transition-delay: 0.20s; }
+.delay-3 { transition-delay: 0.30s; }
+.delay-4 { transition-delay: 0.40s; }
+.delay-5 { transition-delay: 0.50s; }
+.delay-6 { transition-delay: 0.60s; }
+
+/* ── BOTÕES GLOBAIS ── */
+.btn-dourado {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dourado);
+  color: var(--marrom-escuro);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 36px;
+  border-radius: 50px;
+  border: 2px solid var(--dourado);
+  cursor: pointer;
+  transition: var(--trans);
+}
+.btn-dourado:hover {
+  background: transparent;
+  color: var(--dourado);
+}
+
+.btn-outline-branco {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--branco);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 36px;
+  border-radius: 50px;
+  border: 2px solid rgba(255,255,255,0.65);
+  cursor: pointer;
+  transition: var(--trans);
+}
+.btn-outline-branco:hover {
+  background: var(--branco);
+  color: var(--marrom);
+  border-color: var(--branco);
+}
+
+.btn-outline-marrom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--marrom);
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 36px;
+  border-radius: 50px;
+  border: 2px solid var(--marrom);
+  cursor: pointer;
+  transition: var(--trans);
+}
+.btn-outline-marrom:hover {
+  background: var(--marrom);
+  color: var(--branco);
+}
+
+/* ── SECTION TAG ── */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--dourado);
+  margin-bottom: 12px;
+}
+.section-tag::before,
+.section-tag::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--dourado);
+}
+
+/* ── GOLD LINE ── */
+.gold-line {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--dourado), transparent);
+  margin: 18px 0;
+}
+.gold-line.center { margin: 18px auto; }

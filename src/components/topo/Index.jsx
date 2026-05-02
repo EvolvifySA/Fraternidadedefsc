@@ -1,63 +1,79 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import logo from "../../assets/img/logooBranca.png";
 import "./Style.css";
-import menuIcon from "../../assets/icon/menu.png";
-import logoFraternidade from "../../assets/img/logooBranca.png";
 
 function Topo() {
-  const [menuAberto, setMenuAberto] = useState(false);
-  const [submenuAberto, setSubmenuAberto] = useState(false);
-  const [scrollTopo, setScrollTopo] = useState(false);
+  const [scrolled, setScrolled]               = useState(false);
+  const [menuAberto, setMenuAberto]           = useState(false);
+  const [instAberto, setInstAberto]           = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrollTopo(true);
-      } else {
-        setScrollTopo(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 72);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const fechar = () => { setMenuAberto(false); setInstAberto(false); };
+
   return (
-    <header className={`topo ${scrollTopo ? "fixo-transparente" : ""}`}>
-      <div className="logo">
-        <Link to="/">
-          <img
-            className="logo-img"
-            src={logoFraternidade}
-            alt="Logo da Fraternidade"
-          />
-        </Link>
-      </div>
+    <>
+      {/* Overlay mobile */}
+      {menuAberto && (
+        <div className="topo-overlay" onClick={fechar} />
+      )}
 
-      <button className="menu-toggle" onClick={() => setMenuAberto(!menuAberto)}>
-        <img src={menuIcon} alt="Menu" className="icon-menu" />
-      </button>
+      <header className={`topo${scrolled ? " topo--scrolled" : ""}`}>
+        <div className="topo-inner">
 
-      <nav className={`menu ${menuAberto ? "ativo" : ""}`}>
-        <Link to="/">Página Inicial</Link>
+          <Link to="/" className="topo-logo" onClick={fechar}>
+            <img src={logo} alt="Instituto Filhas de Santa Clara" />
+          </Link>
 
-        <div
-          className="menu-institucional"
-          onMouseEnter={() => setSubmenuAberto(true)}
-          onMouseLeave={() => setSubmenuAberto(false)}
-        >
-          <span>Institucional</span>
-          <div className={`submenu ${submenuAberto ? "ativo" : ""}`}>
-            <Link to="/Institucional/QuemSomos">Quem Somos</Link>
-            <Link to="/Institucional/Fundadora">Fundadora</Link>
-            <Link to="/Institucional/Baluarte">Baluarte</Link>
-          </div>
+          <nav className={`topo-nav${menuAberto ? " topo-nav--aberto" : ""}`}>
+            <NavLink to="/" className={({ isActive }) => `nav-link${isActive ? " nav-link--ativo" : ""}`} onClick={fechar} end>
+              Início
+            </NavLink>
+
+            <div className={`nav-drop${instAberto ? " nav-drop--aberto" : ""}`}>
+              <button
+                className="nav-link nav-drop-btn"
+                onClick={() => setInstAberto(!instAberto)}
+              >
+                Institucional
+                <svg className="nav-chevron" width="10" height="6" viewBox="0 0 10 6">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="round"/>
+                </svg>
+              </button>
+              <div className="nav-drop-menu">
+                <Link to="/Institucional/QuemSomos" className="drop-item" onClick={fechar}>Quem Somos</Link>
+                <Link to="/Institucional/Fundadora"  className="drop-item" onClick={fechar}>Nossa Fundadora</Link>
+                <Link to="/Institucional/Baluarte"   className="drop-item" onClick={fechar}>Baluartes</Link>
+              </div>
+            </div>
+
+            <NavLink to="/NossosProjetos" className={({ isActive }) => `nav-link${isActive ? " nav-link--ativo" : ""}`} onClick={fechar}>
+              Projetos
+            </NavLink>
+            <NavLink to="/NossaMissao" className={({ isActive }) => `nav-link${isActive ? " nav-link--ativo" : ""}`} onClick={fechar}>
+              Nossa Missão
+            </NavLink>
+            <Link to="/Doador" className="nav-link nav-link--cta" onClick={fechar}>
+              Seja Benfeitor
+            </Link>
+          </nav>
+
+          <button
+            className={`topo-burger${menuAberto ? " topo-burger--ativo" : ""}`}
+            onClick={() => setMenuAberto(!menuAberto)}
+            aria-label="Abrir menu"
+          >
+            <span /><span /><span />
+          </button>
+
         </div>
-
-        <Link to="/NossosProjetos">Nossos Projetos</Link>
-        <Link to="/NossaMissao">Nossa Missão</Link>
-        <Link to="/Doador">Seja um Benfeitor</Link>
-      </nav>
-    </header>
+      </header>
+    </>
   );
 }
 

@@ -19,22 +19,18 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-        <Topo />
-        <main style={{ flexGrow: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Institucional" element={<Navigate to="/Institucional/QuemSomos" replace />} />
-            <Route path="/Institucional/QuemSomos" element={<QuemSomos />} />
-            <Route path="/Institucional/Fundadora" element={<Fundadora />} />
-            <Route path="/Institucional/Baluarte" element={<Baluarte />} />
-            <Route path="/NossosProjetos" element={<NossosProjetos />} />
-            <Route path="/NossaMissao" element={<NossaMissao />} />
-            <Route path="/Doador" element={<Doador />} />
-          </Routes>
-        </main>
-        <Rodape />
-      </div>
+      <Topo />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Institucional" element={<Navigate to="/Institucional/QuemSomos" replace />} />
+        <Route path="/Institucional/QuemSomos" element={<QuemSomos />} />
+        <Route path="/Institucional/Fundadora" element={<Fundadora />} />
+        <Route path="/Institucional/Baluarte" element={<Baluarte />} />
+        <Route path="/NossosProjetos" element={<NossosProjetos />} />
+        <Route path="/NossaMissao" element={<NossaMissao />} />
+        <Route path="/Doador" element={<Doador />} />
+      </Routes>
+      <Rodape />
     </BrowserRouter>
   </React.StrictMode>
 );
