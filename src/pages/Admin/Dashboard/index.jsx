@@ -134,7 +134,7 @@ function TabGaleria() {
         {itens.map(item => (
           <div key={item.id} className="ad-media-card">
             <div className="ad-media-img">
-              <img src={item.imageUrl} alt={item.titulo} />
+              <img src={item.imagemurl} alt={item.titulo} />
               <span className="ad-badge">{item.categoria}</span>
             </div>
             <div className="ad-media-info">
@@ -250,8 +250,8 @@ function TabMembros() {
         {itens.length === 0 && <p className="ad-empty">Nenhum membro cadastrado.</p>}
         {itens.map(item => (
           <div key={item.id} className="ad-membro-card">
-            {item.imageUrl
-              ? <img src={item.imageUrl} alt={item.nome} className="ad-membro-foto" />
+            {item.imagemurl
+              ? <img src={item.imagemurl} alt={item.nome} className="ad-membro-foto" />
               : <div className="ad-membro-foto ad-membro-sem-foto">
                   {item.nome.charAt(0).toUpperCase()}
                 </div>
@@ -300,7 +300,7 @@ function TabProjetos() {
       fd.append('imagem', arquivo);
       fd.append('titulo', form.titulo);
       fd.append('cat', form.cat);
-      fd.append('desc', form.desc);
+      fd.append('descricao', form.desc);
       fd.append('acoes', form.acoes);
       fd.append('cor', form.cor);
       await apiPost('/api/projetos', fd, setProgresso);
@@ -388,22 +388,30 @@ function TabProjetos() {
 
       <div className="ad-projetos-lista">
         {itens.length === 0 && <p className="ad-empty">Nenhum projeto cadastrado.</p>}
-        {itens.map(item => (
-          <div key={item.id} className="ad-projeto-card">
-            <div className="ad-projeto-img">
-              <img src={item.imageUrl} alt={item.titulo} />
-              <span className="ad-badge" style={{ background: item.cor }}>{item.cat}</span>
+        {itens.map(item => {
+          const acoesLista = Array.isArray(item.acoes)
+            ? item.acoes
+            : typeof item.acoes === 'string'
+              ? item.acoes.split(',').map(a => a.trim()).filter(Boolean)
+              : [];
+
+          return (
+            <div key={item.id} className="ad-projeto-card">
+              <div className="ad-projeto-img">
+                <img src={item.imagemurl} alt={item.titulo} />
+                <span className="ad-badge" style={{ background: item.cor }}>{item.cat}</span>
+              </div>
+              <div className="ad-projeto-info">
+                <strong>{item.titulo}</strong>
+                <p>{item.descricao}</p>
+                {acoesLista.length > 0 && (
+                  <ul>{acoesLista.map((a, i) => <li key={i}>{a}</li>)}</ul>
+                )}
+              </div>
+              <button className="ad-btn-delete" onClick={() => remover(item)} title="Remover">✕</button>
             </div>
-            <div className="ad-projeto-info">
-              <strong>{item.titulo}</strong>
-              <p>{item.desc}</p>
-              {item.acoes?.length > 0 && (
-                <ul>{item.acoes.map((a, i) => <li key={i}>{a}</li>)}</ul>
-              )}
-            </div>
-            <button className="ad-btn-delete" onClick={() => remover(item)} title="Remover">✕</button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

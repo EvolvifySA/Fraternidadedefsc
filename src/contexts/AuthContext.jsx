@@ -27,6 +27,8 @@ export function AuthProvider({ children }) {
     if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
     // Salva o token retornado pelo backend
     localStorage.setItem('authToken', data.token);
+    // Atualiza o estado do usuário
+    setUser({ token: data.token });
     return data;
   }
 

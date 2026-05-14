@@ -21,7 +21,7 @@ function Lightbox({ foto, onClose }) {
     <div className="gl-lightbox" onClick={onClose}>
       <button className="gl-lb-close" onClick={onClose}>✕</button>
       <div className="gl-lb-inner" onClick={e => e.stopPropagation()}>
-        <img src={foto.imageUrl} alt={foto.titulo} />
+        <img src={foto.imagemurl} alt={foto.titulo} />
         <div className="gl-lb-info">
           <span className="gl-badge">{foto.categoria}</span>
           <h3>{foto.titulo}</h3>
@@ -112,14 +112,14 @@ export default function Galeria() {
                   </div>
                   <div className="gl-post-meta">
                     <span className="gl-post-autor">Fraternidade FSC</span>
-                    <span className="gl-post-data">{formatarData(foto.createdAt)}</span>
+                    <span className="gl-post-data">{formatarData(foto.created_at)}</span>
                   </div>
                   <span className="gl-badge">{foto.categoria}</span>
                 </div>
 
                 {/* Imagem */}
                 <div className="gl-post-img" onClick={() => setLightbox(foto)}>
-                  <img src={foto.imageUrl} alt={foto.titulo} loading="lazy" />
+                  <img src={foto.imagemurl} alt={foto.titulo} loading="lazy" />
                 </div>
 
                 {/* Rodapé do post */}

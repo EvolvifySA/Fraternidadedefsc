@@ -35,13 +35,13 @@ router.post('/', requireAuth, upload.single('imagem'), async (req, res) => {
     if (uploadError) {
       return res.status(500).json({ error: `Falha no upload: ${uploadError.message}` });
     }
-    const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(filePath);
-    imagemUrl = publicUrlData.publicUrl;
+    const { data: { publicUrl } } = supabase.storage.from('uploads').getPublicUrl(filePath);
+    imagemUrl = publicUrl;
   }
 
   const { data, error: insertError } = await supabase
     .from('membros')
-    .insert([{ nome, cargo, descricao, imagemUrl }])
+    .insert([{ nome, cargo, descricao, imagemurl: imagemUrl }])
     .select();
 
   if (insertError) {
@@ -57,7 +57,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
 
   const { data: item, error: selectError } = await supabase
     .from('membros')
-    .select('imagemUrl')
+    .select('imagemurl')
     .eq('id', id)
     .single();
 
@@ -65,8 +65,8 @@ router.delete('/:id', requireAuth, async (req, res) => {
     return res.status(404).json({ error: 'Membro não encontrado.' });
   }
 
-  if (item.imagemUrl) {
-    const fileName = item.imagemUrl.split('/').pop();
+  if (item.imagemurl) {
+    const fileName = item.imagemurl.split('/').pop();
     const fullPath = `membros/${fileName}`;
     const { error: deleteImageError } = await supabase.storage
       .from('uploads')
