@@ -1,45 +1,91 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const db = require('../db');
+const supabase = require('../db');
 const requireAuth = require('../middleware/auth');
 
 const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
-const uploadDir = path.join(__dirname, '../uploads/galeria');
-fs.mkdirSync(uploadDir, { recursive: true });
-
-const storage = multer.diskStorage({
-  destination: uploadDir,
-  filename: (req, file, cb) => cb(null, `${Date.now()}_${file.originalname}`),
-});
-const upload = multer({ storage });
-
-router.get('/', (req, res) => {
-  res.json(db.getGaleria());
+router.get('/', async (req, res) => {
+  const { data, error } = await supabase
+    .from('galeria')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
 });
 
-router.post('/', requireAuth, upload.single('imagem'), (req, res) => {
+router.post('/', requireAuth, upload.single('imagem'), async (req, res) => {
   const { titulo, descricao = '', categoria = 'Geral' } = req.body;
   if (!titulo || !req.file) {
     return res.status(400).json({ error: 'Título e imagem são obrigatórios.' });
   }
-  const item = db.addGaleria({
-    titulo,
-    descricao,
-    categoria,
-    imageUrl: `/uploads/galeria/${req.file.filename}`,
-  });
-  res.status(201).json(item);
+
+  const filePath = `galeria/${Date.now()}_${req.file.originalname}`;
+  const { error: uploadError } = await supabase.storage
+    .from('imagens')
+    .upload(filePath, req.file.buffer, {
+      contentType: req.file.mimetype,
+    });
+
+  if (uploadError) {
+    return res.status(500).json({ error: `Falha no upload: ${uploadError.message}` });
+  }
+
+  const { data: publicUrlData } = supabase.storage.from('imagens').getPublicUrl(filePath);
+
+  const { data, error: insertError } = await supabase
+    .from('galeria')
+    .insert([{ 
+      titulo, 
+      descricao, 
+      categoria, 
+      imageUrl: publicUrlData.publicUrl 
+    }])
+    .select();
+
+  if (insertError) {
+    return res.status(500).json({ error: `Falha ao inserir no banco: ${insertError.message}` });
+  }
+
+  res.status(201).json(data[0]);
 });
 
-router.delete('/:id', requireAuth, (req, res) => {
-  const item = db.deleteGaleria(Number(req.params.id));
-  if (!item) return res.status(404).json({ error: 'Não encontrado.' });
+router.delete('/:id', requireAuth, async (req, res) => {
+  const { id } = req.params;
 
+  // Primeiro, pegue os dados do item para saber a URL da imagem
+  const { data: item, error: selectError } = await supabase
+    .from('galeria')
+    .select('imageUrl')
+    .eq('id', id)
+    .single();
+
+  if (selectError || !item) {
+    return res.status(404).json({ error: 'Item não encontrado.' });
+  }
+
+  // Se o item tiver uma imagem, delete-a do storage
   if (item.imageUrl) {
-    try { fs.unlinkSync(path.join(__dirname, '..', item.imageUrl)); } catch { /* já removido */ }
+    const fileName = item.imageUrl.split('/').pop();
+    const { error: deleteImageError } = await supabase.storage
+      .from('imagens')
+      .remove([`galeria/${fileName}`]);
+      
+    if (deleteImageError) {
+      // Log do erro, mas continue para deletar o registro do DB
+      console.error("Erro ao deletar imagem do storage:", deleteImageError.message);
+    }
+  }
+
+  // Agora, delete o registro do banco de dados
+  const { error: deleteDbError } = await supabase
+    .from('galeria')
+    .delete()
+    .eq('id', id);
+
+  if (deleteDbError) {
+    return res.status(500).json({ error: `Falha ao deletar do banco: ${deleteDbError.message}` });
   }
 
   res.json({ ok: true });
