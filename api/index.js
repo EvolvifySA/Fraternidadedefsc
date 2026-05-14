@@ -7,14 +7,23 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+function mountApiRoutes(prefix) {
+  app.use(`${prefix}/auth`, require('./routes/auth'));
+  app.use(`${prefix}/galeria`, require('./routes/galeria'));
+  app.use(`${prefix}/membros`, require('./routes/membros'));
+  app.use(`${prefix}/projetos`, require('./routes/projetos'));
+}
+
 // Rotas da API
-app.use('/auth',     require('./routes/auth'));
-app.use('/galeria',  require('./routes/galeria'));
-app.use('/membros',  require('./routes/membros'));
-app.use('/projetos', require('./routes/projetos'));
+mountApiRoutes('');
+mountApiRoutes('/api');
 
 // Health check
 app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
