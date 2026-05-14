@@ -45,9 +45,24 @@ export default function Galeria() {
   const [lightbox,   setLightbox]   = useState(null);
 
   useEffect(() => {
-    apiGet('/api/galeria')
-      .then(setFotos)
-      .catch(() => {})
+    Promise.allSettled([
+      apiGet('/api/galeria'),
+      apiGet('/api/projetos'),
+    ])
+      .then(([galeriaRes, projetosRes]) => {
+        const galeria = galeriaRes.status === 'fulfilled' ? galeriaRes.value : [];
+        const projetos = projetosRes.status === 'fulfilled' ? projetosRes.value : [];
+
+        const projetosComoFotos = projetos.map((p) => ({
+          ...p,
+          categoria: p.cat || 'Projetos',
+        }));
+
+        const combinados = [...galeria, ...projetosComoFotos]
+          .sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+
+        setFotos(combinados);
+      })
       .finally(() => setCarregando(false));
   }, []);
 
