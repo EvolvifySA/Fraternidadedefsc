@@ -16,9 +16,12 @@ export async function apiLogin(email, password) {
 }
 
 export async function apiGet(path) {
-  const res = await fetch(`${API}${path}`);
-  if (!res.ok) throw new Error('Erro ao buscar dados');
-  return res.json();
+  const res = await fetch(`${API}${path}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Erro ao buscar dados');
+  return data;
 }
 
 export function apiPost(path, formData, onProgress) {
