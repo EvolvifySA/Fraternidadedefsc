@@ -54,7 +54,7 @@ router.post('/', requireAuth, upload.single('imagem'), async (req, res) => {
 router.delete('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
 
-  // Primeiro, pegue os dados do item para saber a URL da imagem
+
   const { data: item, error: selectError } = await supabase
     .from('galeria')
     .select('imageUrl')
@@ -65,7 +65,7 @@ router.delete('/:id', requireAuth, async (req, res) => {
     return res.status(404).json({ error: 'Item não encontrado.' });
   }
 
-  // Se o item tiver uma imagem, delete-a do storage
+
   if (item.imageUrl) {
     const fileName = item.imageUrl.split('/').pop();
     const { error: deleteImageError } = await supabase.storage

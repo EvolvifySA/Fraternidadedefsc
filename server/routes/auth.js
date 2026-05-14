@@ -1,33 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); 
+const jwt = require('jsonwebtoken');
 const supabase = require('../db');
 
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
+  }
 
-  const { data: user, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('email', email)
-    .single();
+  // Autentica o usuário com o Supabase Auth
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  });
 
-  if (error || !user) {
+  if (error) {
     return res.status(401).json({ error: 'Usuário ou senha inválidos' });
   }
 
-
-  const senhaCorreta = bcrypt.compareSync(password, user.password_hash);
-  
-  if (!senhaCorreta) {
-    return res.status(401).json({ error: 'Usuário ou senha inválidos' });
-  }
-
-  const token = jwt.sign({ id: user.id }, 'SUA_CHAVE_SECRETA_DO_JWT', { expiresIn: '1d' });
-
-  res.json({ token });
+  // O 'data.session.access_token' é o JWT gerado pelo Supabase
+  res.json({ token: data.session.access_token });
 });
 
 module.exports = router;
