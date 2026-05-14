@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
   }
 
-  // Autentica o usuário com o Supabase Auth
+
   const { data, error } = await supabase.auth.signInWithPassword({
     email: email,
     password: password,
@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
     return res.status(401).json({ error: 'Usuário ou senha inválidos' });
   }
 
-  // O 'data.session.access_token' é o JWT gerado pelo Supabase
+
   res.json({ token: data.session.access_token });
 });
 
