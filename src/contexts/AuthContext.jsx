@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { supabase } from '../supabase'; // Importa o cliente Supabase
 
 const AuthContext = createContext(null);
 
@@ -8,49 +7,33 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Tenta pegar a sessão existente ao carregar o app
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session) {
-        // Guarda o token para as funções da api.js usarem
-        localStorage.setItem('authToken', session.access_token);
-      }
-      setLoading(false);
-    });
-
-    // 2. Ouve por mudanças no estado de autenticação (login, logout)
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
-        if (session) {
-          localStorage.setItem('authToken', session.access_token);
-        } else {
-          // Limpa o token ao fazer logout
-          localStorage.removeItem('authToken');
-        }
-        setLoading(false);
-      }
-    );
-
-    // 3. Limpa o listener quando o componente desmontar
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
+    // Ao carregar o app, verifica se existe token salvo
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Token existe, então o usuário estava logado
+      setUser({ token }); // Salva o token no estado
+    }
+    setLoading(false);
   }, []);
 
-  // A função de login agora usa o Supabase Auth
+  // A função de login agora chama o backend Node
   async function login(email, password) {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     });
-    if (error) throw error;
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Erro ao fazer login');
+    // Salva o token retornado pelo backend
+    localStorage.setItem('authToken', data.token);
     return data;
   }
 
-  // A função de logout agora usa o Supabase Auth
+  // A função de logout limpa o token do localStorage
   function logout() {
-    supabase.auth.signOut();
+    localStorage.removeItem('authToken');
+    setUser(null);
   }
 
   const value = {

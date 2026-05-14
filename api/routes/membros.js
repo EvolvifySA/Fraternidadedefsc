@@ -6,42 +6,42 @@ const requireAuth = require('../middleware/auth');
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
+// GET /api/membros - Retorna todos os membros
 router.get('/', async (req, res) => {
   const { data, error } = await supabase
-    .from('galeria')
+    .from('membros')
     .select('*')
     .order('created_at', { ascending: false });
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);
 });
 
+// POST /api/membros - Adiciona um novo membro
 router.post('/', requireAuth, upload.single('imagem'), async (req, res) => {
-  const { titulo, descricao = '', categoria = 'Geral' } = req.body;
-  if (!titulo || !req.file) {
-    return res.status(400).json({ error: 'Título e imagem são obrigatórios.' });
+  const { nome, cargo = '', descricao = '' } = req.body;
+  if (!nome) {
+    return res.status(400).json({ error: 'Nome é obrigatório.' });
   }
 
-  const filePath = `galeria/${Date.now()}_${req.file.originalname}`;
-  const { error: uploadError } = await supabase.storage
-    .from('imagens')
-    .upload(filePath, req.file.buffer, {
-      contentType: req.file.mimetype,
-    });
+  let imagemUrl = '';
+  if (req.file) {
+    const filePath = `membros/${Date.now()}_${req.file.originalname}`;
+    const { error: uploadError } = await supabase.storage
+      .from('uploads')
+      .upload(filePath, req.file.buffer, {
+        contentType: req.file.mimetype,
+      });
 
-  if (uploadError) {
-    return res.status(500).json({ error: `Falha no upload: ${uploadError.message}` });
+    if (uploadError) {
+      return res.status(500).json({ error: `Falha no upload: ${uploadError.message}` });
+    }
+    const { data: publicUrlData } = supabase.storage.from('uploads').getPublicUrl(filePath);
+    imagemUrl = publicUrlData.publicUrl;
   }
-
-  const { data: publicUrlData } = supabase.storage.from('imagens').getPublicUrl(filePath);
 
   const { data, error: insertError } = await supabase
-    .from('galeria')
-    .insert([{ 
-      titulo, 
-      descricao, 
-      categoria, 
-      imageUrl: publicUrlData.publicUrl 
-    }])
+    .from('membros')
+    .insert([{ nome, cargo, descricao, imagemUrl }])
     .select();
 
   if (insertError) {
@@ -51,36 +51,34 @@ router.post('/', requireAuth, upload.single('imagem'), async (req, res) => {
   res.status(201).json(data[0]);
 });
 
+// DELETE /api/membros/:id - Deleta um membro
 router.delete('/:id', requireAuth, async (req, res) => {
   const { id } = req.params;
 
-
   const { data: item, error: selectError } = await supabase
-    .from('galeria')
-    .select('imageUrl')
+    .from('membros')
+    .select('imagemUrl')
     .eq('id', id)
     .single();
 
   if (selectError || !item) {
-    return res.status(404).json({ error: 'Item não encontrado.' });
+    return res.status(404).json({ error: 'Membro não encontrado.' });
   }
 
-
-  if (item.imageUrl) {
-    const fileName = item.imageUrl.split('/').pop();
+  if (item.imagemUrl) {
+    const fileName = item.imagemUrl.split('/').pop();
+    const fullPath = `membros/${fileName}`;
     const { error: deleteImageError } = await supabase.storage
-      .from('imagens')
-      .remove([`galeria/${fileName}`]);
+      .from('uploads')
+      .remove([fullPath]);
       
     if (deleteImageError) {
-      // Log do erro, mas continue para deletar o registro do DB
       console.error("Erro ao deletar imagem do storage:", deleteImageError.message);
     }
   }
 
-  // Agora, delete o registro do banco de dados
   const { error: deleteDbError } = await supabase
-    .from('galeria')
+    .from('membros')
     .delete()
     .eq('id', id);
 
